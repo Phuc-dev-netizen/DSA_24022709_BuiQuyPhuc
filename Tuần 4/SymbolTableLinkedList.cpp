@@ -45,7 +45,7 @@ struct SymbolTable {
             }
             current = current->next;
         }
-        return ""; // Không tìm thấy
+        return "Không tìm thấy";
     }
 
     // Kiểm tra key có tồn tại không
@@ -56,21 +56,24 @@ struct SymbolTable {
     // Xóa một key khỏi bảng
     void deleteKey(string key) {
         Node* current = head;
-        Node* prev = NULL;
-        while (current != NULL) {
-            if (current->key == key) {
-                if (prev == NULL) {
-                    head = current->next;
-                } else {
-                    prev->next = current->next;
-                }
-                delete current;
-                count--;
+        if(head!= NULL && head -> key == key){
+            head = head -> next;
+            delete current;
+            count --;
+            return;
+        }
+        while(current != NULL && current -> next != NULL){
+            if(current -> next -> key == key){
+                Node* nodeToDel = current -> next;
+                current -> next = nodeToDel -> next;
+                delete nodeToDel;
+                count -- ;
                 return;
             }
-            prev = current;
-            current = current->next;
+            current = current -> next;
         }
+        // Nếu không tìm thấy key
+        cout << "Không tìm thấy key: " << key << " để xóa." << endl;
     }
 
     // Kiểm tra bảng có rỗng không
@@ -101,6 +104,7 @@ struct SymbolTable {
             current = current->next;
             delete temp;
         }
+        cout << "SymbolTable đã được hủy và giải phóng bộ nhớ." << endl;
     }
 };
 
@@ -114,7 +118,7 @@ int main() {
 
     cout << "Giá trị của B: " << st.get("B") << endl;
 
-    st.deleteKey("B");
+    st.deleteKey("D");
 
     cout << "Các key còn lại: ";
     st.keys();

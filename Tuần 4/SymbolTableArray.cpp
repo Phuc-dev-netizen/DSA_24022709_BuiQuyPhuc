@@ -42,7 +42,7 @@ struct SymbolTable {
                 return entries[i].value;
             }
         }
-        return ""; // Không tìm thấy
+        return "Không tìm thấy";
     }
 
     // Kiểm tra key có tồn tại không
@@ -92,7 +92,7 @@ int main() {
 
     cout << "Giá trị của B: " << st.get("B") << endl;
 
-    st.deleteKey("B");
+    st.deleteKey("D");
 
     cout << "Các key còn lại: ";
     st.keys();
