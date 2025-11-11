@@ -14,7 +14,7 @@ struct Entry {
 struct HashTable {
     Entry table[TABLE_SIZE];
 
-    void init() {
+    HashTable() {
         for (int i = 0; i < TABLE_SIZE; ++i) {
             table[i].isEmpty = true;
             table[i].isDeleted = false;
